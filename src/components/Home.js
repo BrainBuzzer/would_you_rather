@@ -1,16 +1,13 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import HomeNav from './Navigation/HomeNav'
 
 class Home extends Component {
-  render() {
+  render () {
     return (
       <div>
         <div className="container">
-          <div className="menu-home">
-            <div className="logo">Would You Rather?</div>
-            <Link to="/auth" className="login">Login</Link>
-            <Link to="/auth" className="register primary button">Register</Link>
-          </div>
+          <HomeNav />
           <div className="hero">
             <div className="text">
               Participate in the ultimate quest<br />
@@ -28,14 +25,14 @@ class Home extends Component {
         <div className="question-home">
           <div className="opt option-one">
             <div className="option-text">
-                Blue Pill, and  you have security, happiness 
+                Blue Pill, and  you have security, happiness
                 and the blissful ignorance of illusion
             </div>
           </div>
           <div className="opt option-two">
             <div className="option-text">
                 Red Pill, and you have knowledge,
-                freedom, and the brutal truths of reality 
+                freedom, and the brutal truths of reality
             </div>
           </div>
         </div>
