@@ -2,29 +2,28 @@ import React, { Component } from 'react'
 import HomeNav from './Navigation/HomeNav'
 
 class Auth extends Component {
-  state = {
-    login: false
-  }
-
   constructor () {
     super()
+    this.state = {
+      login: false
+    }
     this.handleSwitch = this.handleSwitch.bind(this)
   }
 
   handleSwitch (action) {
-    switch(action) {
+    switch (action) {
       case 'login':
         this.setState({ login: true })
-        break;
+        break
       case 'register':
         this.setState({ login: false })
-        break;
+        break
       default:
-        break;
+        break
     }
   }
 
-  render() {
+  render () {
     const { login } = this.state
 
     return (
@@ -33,11 +32,11 @@ class Auth extends Component {
         <div className="centered">
           <div className="registration-box">
             <div className="buttons">
-              <div className={login ? "register-button button" : "register-button button active"} onClick={() => this.handleSwitch('register')}>Register</div>
-              <div className={login ? "login-button button active" : "login-button button"} onClick={() => this.handleSwitch('login')}>Login</div>
+              <div className={login ? 'register-button button' : 'register-button button active'} onClick={() => this.handleSwitch('register')}>Register</div>
+              <div className={login ? 'login-button button active' : 'login-button button'} onClick={() => this.handleSwitch('login')}>Login</div>
             </div>
             <div className="sections">
-              <div className={login ? "register-section hidden" : "register-section"} id='register-section'>
+              <div className={login ? 'register-section hidden' : 'register-section'}>
                 <form>
                   <div className="input-field">
                     <label for="username">Username:</label><br />
@@ -50,7 +49,7 @@ class Auth extends Component {
                   <button type="submit" className="submit-button">Register</button>
                 </form>
               </div>
-              <div className={login ? "login-section" : "login-section hidden"} id='login-section'>
+              <div className={login ? 'login-section' : 'login-section hidden'} id='login-section'>
                 <form>
                   <div className="input-field">
                     <label for="username">Username:</label><br/ >

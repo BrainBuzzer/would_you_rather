@@ -1,9 +1,14 @@
 import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
+import { connect } from 'react-redux'
 import Home from './Home'
 import Auth from './Auth'
+import { handleInitialData } from '../actions/shared'
 
 class App extends Component {
+  componentDidMount () {
+    this.props.dispatch(handleInitialData())
+  }
   render () {
     return (
       <div>
@@ -16,4 +21,4 @@ class App extends Component {
   }
 }
 
-export default App
+export default connect()(App)

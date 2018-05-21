@@ -5,7 +5,7 @@ import {
   _saveQuestionAnswer
 } from './_DATA.js'
 
-export function handleInitialData () {
+export function getInitialData () {
   return Promise.all([
     _getQuestions(),
     _getUsers()
