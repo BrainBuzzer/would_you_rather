@@ -1,13 +1,19 @@
 import React, { Component } from 'react'
 import HomeNav from './Navigation/HomeNav'
+import { Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { handleUserLogin } from '../actions/auth'
 
 class Auth extends Component {
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
     this.state = {
-      login: false
+      login: false,
+      redirect: false,
+      userNotFound: false
     }
     this.handleSwitch = this.handleSwitch.bind(this)
+    this.handleLogin = this.handleLogin.bind(this)
   }
 
   handleSwitch (action) {
@@ -23,8 +29,29 @@ class Auth extends Component {
     }
   }
 
+  handleLogin (e) {
+    e.preventDefault()
+    const username = e.target[0].value
+    let found = false
+    const { users, dispatch } = this.props
+    users.map(user => {
+      if (user === username) {
+        found = true
+        dispatch(handleUserLogin(username))
+        this.setState({ redirect: true })
+      }
+    })
+    if (!found) {
+      this.setState({ userNotFound: true })
+    }
+  }
+
   render () {
-    const { login } = this.state
+    const { login, redirect, userNotFound } = this.state
+
+    if (redirect) {
+      return <Redirect to='/dashboard' />
+    }
 
     return (
       <div>
@@ -39,20 +66,23 @@ class Auth extends Component {
               <div className={login ? 'register-section hidden' : 'register-section'}>
                 <form>
                   <div className="input-field">
-                    <label for="username">Username:</label><br />
+                    <label htmlFor="username">Username:</label><br />
                     <input type="text" id="username" placeholder="Input your Username" />
                   </div>
                   <div className="input-field">
-                    <label for="name">Name:</label><br />
+                    <label htmlFor="name">Name:</label><br />
                     <input type="text" id="name" placeholder="Input your Name" />
                   </div>
                   <button type="submit" className="submit-button">Register</button>
                 </form>
               </div>
               <div className={login ? 'login-section' : 'login-section hidden'} id='login-section'>
-                <form>
+                { userNotFound && (
+                  <div style={{ color: 'red' }}>Wrong Username</div>
+                )}
+                <form onSubmit={this.handleLogin}>
                   <div className="input-field">
-                    <label for="username">Username:</label><br/ >
+                    <label htmlFor="username">Username:</label><br/ >
                     <input type="text" id="username" placeholder="Input your Username" />
                   </div>
                   <button type="submit" className="submit-button">Login</button>
@@ -66,4 +96,11 @@ class Auth extends Component {
   }
 }
 
-export default Auth
+function mapStateToProps ({ users }) {
+  const usersProp = Object.keys(users)
+  return {
+    users: usersProp
+  }
+}
+
+export default connect(mapStateToProps)(Auth)
