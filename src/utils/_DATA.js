@@ -218,3 +218,22 @@ export function _saveQuestionAnswer ({
     }, 500)
   })
 }
+
+export function _saveNewUser ({ username, name }) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      users = {
+        ...users,
+        username: {
+          id: username,
+          name,
+          avatarURL: '',
+          answers: {},
+          questions: []
+        }
+      }
+
+      resolve()
+    }, 1000)
+  })
+}
