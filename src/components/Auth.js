@@ -3,6 +3,7 @@ import HomeNav from './Navigation/HomeNav'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { handleUserLogin } from '../actions/auth'
+import { handleUserRegistration } from '../actions/shared'
 
 class Auth extends Component {
   constructor (props) {
@@ -10,10 +11,12 @@ class Auth extends Component {
     this.state = {
       login: false,
       redirect: false,
-      userNotFound: false
+      userNotFound: false,
+      usernameAlreadyTaken: false
     }
     this.handleSwitch = this.handleSwitch.bind(this)
     this.handleLogin = this.handleLogin.bind(this)
+    this.handleRegistration = this.handleRegistration.bind(this)
   }
 
   handleSwitch (action) {
@@ -46,10 +49,24 @@ class Auth extends Component {
     }
   }
 
-  render () {
-    const { login, redirect, userNotFound } = this.state
+  handleRegistration (e) {
+    e.preventDefault()
+    const username = e.target[0].value
+    const name = e.target[1].value
+    const { users, dispatch } = this.props
+    users.map(user => {
+      if (user === username) {
+        this.setState({ usernameAlreadyTaken: true })
+      }
+    })
+    dispatch(handleUserRegistration(username, name))
+  }
 
-    if (redirect) {
+  render () {
+    const { login, redirect, userNotFound, usernameAlreadyTaken } = this.state
+    const { auth } = this.props
+
+    if (redirect || auth != null) {
       return <Redirect to='/dashboard' />
     }
 
@@ -64,7 +81,10 @@ class Auth extends Component {
             </div>
             <div className="sections">
               <div className={login ? 'register-section hidden' : 'register-section'}>
-                <form>
+                { usernameAlreadyTaken && (
+                  <div style={{ color: 'red' }}>Username Already Taken</div>
+                )}
+                <form onSubmit={this.handleRegistration}>
                   <div className="input-field">
                     <label htmlFor="username">Username:</label><br />
                     <input type="text" id="username" placeholder="Input your Username" />
@@ -96,10 +116,11 @@ class Auth extends Component {
   }
 }
 
-function mapStateToProps ({ users }) {
+function mapStateToProps ({ users, auth }) {
   const usersProp = Object.keys(users)
   return {
-    users: usersProp
+    users: usersProp,
+    auth
   }
 }
 
