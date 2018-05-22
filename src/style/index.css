@@ -234,6 +234,7 @@ label {
 
 .input-field > input[type=text] {
   margin-top: 5px;
+  outline: none;
   width: 90%;
   padding: 15px;
   font-family: 'Tenor Sans', sans-serif;
