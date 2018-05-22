@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Route } from 'react-router-dom'
+import { Route, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Home from './Home'
 import Auth from './Auth'
@@ -21,4 +21,4 @@ class App extends Component {
   }
 }
 
-export default connect()(App)
+export default withRouter(connect()(App))
