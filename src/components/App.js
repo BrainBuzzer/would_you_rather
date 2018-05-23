@@ -9,6 +9,7 @@ import QuestionDetails from './QuestionDetails'
 import Logout from './Logout'
 import AddQuestion from './AddQuestion'
 import YourQuestions from './YourQuestions'
+import Leaderboard from './Leaderboard'
 
 class App extends Component {
   componentDidMount () {
@@ -24,6 +25,7 @@ class App extends Component {
           <Route exact path='/question/:id' component={QuestionDetails} />
           <Route exact path='/add_question' component={AddQuestion} />
           <Route exact path='/profile' component={YourQuestions} />
+          <Route exact path='/leaderboard' component={Leaderboard} />
           <Route exact path='/logout' component={Logout} />
         </div>
       </div>
