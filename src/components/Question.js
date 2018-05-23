@@ -15,12 +15,14 @@ class Question extends Component {
 
   changeOption (opt) {
     const { dispatch, auth, question } = this.props
-    if (opt === 1) {
-      dispatch(handleAnswer(auth, question.id, 'optionOne'))
-      this.setState({ answer: 'optionOne' })
-    } else if (opt === 2) {
-      dispatch(handleAnswer(auth, question.id, 'optionTwo'))
-      this.setState({ answer: 'optionTwo' })
+    if (!this.state.answer) {
+      if (opt === 1) {
+        dispatch(handleAnswer(auth, question.id, 'optionOne'))
+        this.setState({ answer: 'optionOne' })
+      } else if (opt === 2) {
+        dispatch(handleAnswer(auth, question.id, 'optionTwo'))
+        this.setState({ answer: 'optionTwo' })
+      }
     }
   }
 
