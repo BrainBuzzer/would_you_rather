@@ -7,6 +7,7 @@ import { handleInitialData } from '../actions/shared'
 import Dashboard from './Dashboard'
 import QuestionDetails from './QuestionDetails'
 import Logout from './Logout'
+import AddQuestion from './AddQuestion'
 
 class App extends Component {
   componentDidMount () {
@@ -20,6 +21,7 @@ class App extends Component {
           <Route exact path='/auth' component={Auth} />
           <Route exact path='/dashboard' component={Dashboard} />
           <Route exact path='/question/:id' component={QuestionDetails} />
+          <Route exact path='/add_question' component={AddQuestion} />
           <Route exact path='/logout' component={Logout} />
         </div>
       </div>
