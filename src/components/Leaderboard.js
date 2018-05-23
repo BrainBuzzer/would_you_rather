@@ -1,46 +1,44 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import UserNav from './Navigation/UserNav'
 import LeaderboardMeta from './Meta/LeaderboardMeta'
 
-class Leaderboard extends Component {
-  render () {
-    const { auth, data } = this.props
+const Leaderboard = (props) => {
+  const { auth, data } = props
 
-    if (auth === null) {
-      return <Redirect to='/auth' />
-    }
-
-    return (
-      <div>
-        <UserNav />
-        <LeaderboardMeta />
-        <table>
-          <thead>
-            <tr>
-              <th>Rank</th>
-              <th>Name</th>
-              <th>Picture</th>
-              <th>Questions</th>
-              <th>Answers</th>
-            </tr>
-          </thead>
-          <tbody>
-            { data.map((user, key) => (
-              <tr key={user.id}>
-                <td>{key + 1}</td>
-                <td>{user.name}</td>
-                <td><img src={ user.avatar === '' ? './user-icon.png' : user.avatar} alt="User icon" /></td>
-                <td>{user.questions}</td>
-                <td>{user.answers}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    )
+  if (auth === null) {
+    return <Redirect to='/auth' />
   }
+
+  return (
+    <div>
+      <UserNav />
+      <LeaderboardMeta />
+      <table>
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Name</th>
+            <th>Picture</th>
+            <th>Questions</th>
+            <th>Answers</th>
+          </tr>
+        </thead>
+        <tbody>
+          { data.map((user, key) => (
+            <tr key={user.id}>
+              <td>{key + 1}</td>
+              <td>{user.name}</td>
+              <td><img src={ user.avatar === '' ? './user-icon.png' : user.avatar} alt="User icon" /></td>
+              <td>{user.questions}</td>
+              <td>{user.answers}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )
 }
 
 function mapStateToProps ({ auth, users }) {

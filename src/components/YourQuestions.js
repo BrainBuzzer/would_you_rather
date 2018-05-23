@@ -1,30 +1,28 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import UserNav from './Navigation/UserNav'
 import Question from './Question'
 import HelloMeta from './Meta/HelloMeta'
 import { Redirect } from 'react-router-dom'
 
-class YourQuestions extends Component {
-  render () {
-    const { user, auth, questions } = this.props
+const YourQuestions = (props) => {
+  const { user, auth, questions } = props
 
-    if (auth === null) {
-      return <Redirect to='/auth' />
-    }
-
-    return (
-      <div>
-        <UserNav />
-        <HelloMeta user={user}/>
-        <div className="set">
-          { questions.map(question => (
-            <Question question={question} answer={user.answers[question.id]} key={question.id} />
-          ))}
-        </div>
-      </div>
-    )
+  if (auth === null) {
+    return <Redirect to='/auth' />
   }
+
+  return (
+    <div>
+      <UserNav />
+      <HelloMeta user={user}/>
+      <div className="set">
+        { questions.map(question => (
+          <Question question={question} answer={user.answers[question.id]} key={question.id} />
+        ))}
+      </div>
+    </div>
+  )
 }
 
 function mapStateToProps ({ auth, users, questions }) {
