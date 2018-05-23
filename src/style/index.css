@@ -450,3 +450,7 @@ td {
 td > img {
   width: 50px;
 }
+
+.answered, .unanswered {
+  cursor: pointer;
+}
