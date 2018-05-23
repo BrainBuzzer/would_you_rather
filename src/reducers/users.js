@@ -1,6 +1,7 @@
 import {
   GET_USERS,
-  USER_ANSWER_QUESTION
+  USER_ANSWER_QUESTION,
+  ADD_USER_QUESTION
 } from '../actions/users'
 
 export function users (state = {}, action) {
@@ -19,6 +20,14 @@ export function users (state = {}, action) {
             ...state[action.auth].answers,
             [action.qid]: action.option
           }
+        }
+      }
+    case ADD_USER_QUESTION:
+      return {
+        ...state,
+        [action.question.author]: {
+          ...state[action.question.author],
+          questions: [...state[action.question.author].questions, action.question.id]
         }
       }
     default:

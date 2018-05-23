@@ -1,7 +1,12 @@
-import { getUsers, saveUserAnswer } from './users'
-import { getQuestions, saveAnswer } from './questions'
+import { getUsers, saveUserAnswer, addUserQuestion } from './users'
+import { getQuestions, saveAnswer, handleAddQuestion } from './questions'
 import { handleUserLogin } from './auth'
-import { getInitialData, saveNewUser, saveQuestionAnswer } from '../utils/api'
+import {
+  getInitialData,
+  saveNewUser,
+  saveQuestionAnswer,
+  saveQuestion
+} from '../utils/api'
 
 export const GET_INITIAL_DATA = 'GET_INITIAL_DATA'
 
@@ -41,5 +46,18 @@ export function handleAnswer (auth, qid, option) {
         dispatch(saveAnswer(auth, qid, option))
         dispatch(saveUserAnswer(auth, qid, option))
       })
+  }
+}
+
+export function addQuestionAction (auth, optOne, optTwo) {
+  return dispatch => {
+    saveQuestion({
+      optionOneText: optOne,
+      optionTwoText: optTwo,
+      author: auth
+    }).then(question => {
+      dispatch(addUserQuestion(question))
+      dispatch(handleAddQuestion(question))
+    })
   }
 }

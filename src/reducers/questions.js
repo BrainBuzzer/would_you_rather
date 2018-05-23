@@ -1,6 +1,7 @@
 import {
   GET_QUESTIONS,
-  ANSWER_QUESTION
+  ANSWER_QUESTION,
+  ADD_QUESTION
 } from '../actions/questions'
 
 export function questions (state = {}, action) {
@@ -20,6 +21,11 @@ export function questions (state = {}, action) {
             votes: state[action.qid][action.option].votes.concat([action.auth])
           }
         }
+      }
+    case ADD_QUESTION:
+      return {
+        ...state,
+        [action.question.id]: action.question
       }
     default:
       return state
