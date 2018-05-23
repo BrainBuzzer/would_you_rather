@@ -1,7 +1,7 @@
-import { getUsers } from './users'
-import { getQuestions } from './questions'
+import { getUsers, saveUserAnswer } from './users'
+import { getQuestions, saveAnswer } from './questions'
 import { handleUserLogin } from './auth'
-import { getInitialData, saveNewUser } from '../utils/api'
+import { getInitialData, saveNewUser, saveQuestionAnswer } from '../utils/api'
 
 export const GET_INITIAL_DATA = 'GET_INITIAL_DATA'
 
@@ -22,9 +22,24 @@ export function handleUserRegistration (username, name) {
         if (users.error) {
           console.error('Username Already taken')
         } else {
-          dispatch(handleUserLogin(username))
           dispatch(getUsers(users))
+          dispatch(handleUserLogin(username))
         }
+      })
+  }
+}
+
+export function handleAnswer (auth, qid, option) {
+  const data = {
+    authedUser: auth,
+    qid,
+    answer: option
+  }
+  return (dispatch) => {
+    saveQuestionAnswer(data)
+      .then(() => {
+        dispatch(saveAnswer(auth, qid, option))
+        dispatch(saveUserAnswer(auth, qid, option))
       })
   }
 }
