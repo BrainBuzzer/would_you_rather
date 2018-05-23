@@ -353,7 +353,7 @@ label {
   font-size: 15px;  
 }
 
-.selected {
+.selected, .selected:hover {
   background-image: url('../assets/selected.png');
   background-position: center;
   background-repeat: no-repeat;
