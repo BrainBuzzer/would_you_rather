@@ -46,7 +46,7 @@ class Question extends Component {
           <div className={cls[0]} onClick={() => this.changeOption(1)}>{question.optionOne.text}</div>
           <div className={cls[1]} onClick={() => this.changeOption(2)}>{question.optionTwo.text}</div>
         </div>
-        <Link to={`/question/${question.id}`} className="opt more"><FaAngleRight /></Link>
+        <Link to={`/questions/${question.id}`} className="opt more"><FaAngleRight /></Link>
       </div>
     )
   }

@@ -74,7 +74,7 @@ class QuestionDetails extends Component {
 }
 
 function mapStateToProps ({ auth, questions, users }, { match }) {
-  let question = questions[match.params.id]
+  let question = questions[match.params.question_id]
   let answer, percOne, percTwo, total
 
   if (auth !== null) {

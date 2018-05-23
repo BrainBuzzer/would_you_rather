@@ -22,8 +22,8 @@ class App extends Component {
         <div className="container">
           <Route exact path='/auth' component={Auth} />
           <Route exact path='/dashboard' component={Dashboard} />
-          <Route exact path='/question/:id' component={QuestionDetails} />
-          <Route exact path='/add_question' component={AddQuestion} />
+          <Route exact path='/questions/:question_id' component={QuestionDetails} />
+          <Route exact path='/add' component={AddQuestion} />
           <Route exact path='/profile' component={YourQuestions} />
           <Route exact path='/leaderboard' component={Leaderboard} />
           <Route exact path='/logout' component={Logout} />
